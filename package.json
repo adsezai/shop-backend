@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "shop backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "Adis Sezairi",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.2.6",
+    "express": "^4.17.1",
+    "js-yaml": "^3.13.1",
+    "mongoose": "^5.9.2"
+  }
+}
