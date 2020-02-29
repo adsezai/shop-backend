@@ -2,11 +2,13 @@ const express = require('express')
 const app = express()
 
 const { router } = require('./routes/ItemRouter')
-// const connection = require('./lib/db/mongo')
-// const { Item } = require('./lib/db/schemas/schemas')
+const connection = require('./lib/db/mongo')
 
-/* const itm = new Item({ name: 'Golf' })
-itm.save().then(() => console.log('saved')) */
-app.use('/', router)
+const userService = require('./service/User')
+const itemService = require('./service/Item')
 
-app.listen(8080, () => console.log('app running'))
+userService.addNewItem('893faa20-89bf-4c04-b645-2309d30c65cc', { title: 'Golf', currency: 'eur', price: 2800 })
+
+// app.use('/', router)
+
+// app.listen(8080, () => console.log('app running'))

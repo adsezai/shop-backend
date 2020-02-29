@@ -1,0 +1,1213 @@
+{
+  "data": {
+    "item": {
+      "status": "Found",
+      "result": {
+        "__typename": "Item",
+        "id": "XllXQJJDdThVRIgU",
+        "title": "Shisha",
+        "description": "Shisha abzuben mit 2 Schlächen,Grill und kohle\n\nprivat verkauf keine Garantie und Rücknahme !",
+        "path": "/de-de/i/XllXQJJDdThVRIgU/shisha",
+        "locality": "89287 Bellenberg",
+        "price": 80,
+        "originalPrice": null,
+        "currency": "eur",
+        "media": [
+          {
+            "id": "5e5957409243753855677811",
+            "width": 720,
+            "height": 1280,
+            "title": "",
+            "__typename": "Media"
+          },
+          {
+            "id": "5e595743e22795380f9434b8",
+            "width": 720,
+            "height": 1280,
+            "title": "",
+            "__typename": "Media"
+          }
+        ],
+        "location": {
+          "latitude": 48.253321290612,
+          "longitude": 10.093170908819,
+          "__typename": "Geo"
+        },
+        "startDate": 1582913344000,
+        "modifiedDate": null,
+        "distance": 2,
+        "user": {
+          "id": "WrtFXh7uZ2wBbNV-",
+          "name": "Jasmin S.",
+          "avatar": {
+            "id": "5ccc1bb621c5f538260fa480",
+            "width": 200,
+            "height": 200,
+            "isDefault": false,
+            "__typename": "Avatar"
+          },
+          "language": "de",
+          "locale": "de_DE",
+          "signupDate": 1522222430000,
+          "proSellerVertical": null,
+          "avgRating": 3.6,
+          "numRatings": 5,
+          "numItemsSold": 5,
+          "numItemsBought": 0,
+          "numItemsSelling": 8,
+          "isProSeller": false,
+          "__typename": "UserSummary"
+        },
+        "buyer": null,
+        "numLikes": 0,
+        "isNew": false,
+        "isSold": false,
+        "isFree": false,
+        "isOnSale": false,
+        "isLiked": false,
+        "isWatched": false,
+        "isBoosted": false,
+        "isShippable": false,
+        "category": [
+          "ot"
+        ],
+        "customProperties": null,
+        "od": "AxBmVTk6P2TAXJXRuLdN5c6zF4gkyKhZb65NY4SCaevWOecml8jn1I7hinwypASU|63BrmIDLGmiHXMY0L2Rmxw==",
+        "metadata": [],
+        "activityGroup": {
+          "id": "init",
+          "kind": "DC1",
+          "__typename": "ActivityGroup"
+        },
+        "latestActivities": [],
+        "allowedActivities": {
+          "canAskQuestions": true,
+          "answerQuestions": [],
+          "removeQuestions": [],
+          "removeAnswers": [],
+          "__typename": "ItemAllowedActivities",
+          "canDelistItem": false,
+          "canMarkAsSoldElsewhere": false,
+          "canEdit": false,
+          "editableFields": [],
+          "canAddItemToWatchList": true,
+          "canDialNumber": false,
+          "canReportItem": true,
+          "canBuyNow": false
+        },
+        "countQuestions": 0,
+        "countAnswers": 0,
+        "questions": null,
+        "paymentOptions": {
+          "isBuyNow": false,
+          "__typename": "PaymentOptions"
+        },
+        "showPaymentSummary": false,
+        "paymentSummary": null,
+        "parcel": null,
+        "adKeywords": [
+          "sk:shisha",
+          "sk_original:shisha",
+          "isp:other",
+          "cat:ot",
+          "cat:hg",
+          "pr:75_100",
+          "seg:9",
+          "seg_100:22",
+          "cc:de",
+          "pc:89287",
+          "pcp:89",
+          "loc:89287 bellenberg",
+          "price:80",
+          "currency:eur",
+          "seller_type:private"
+        ],
+        "canonicalURL": "https://www.shpock.com/de-de/i/XllXQJJDdThVRIgU/shisha"
+      },
+      "__typename": "ItemResponse"
+    }
+  },
+  "extensions": {
+    "tracing": {
+      "version": 1,
+      "startTime": "2020-02-29T13:15:00.250Z",
+      "endTime": "2020-02-29T13:15:00.303Z",
+      "duration": 52920766,
+      "execution": {
+        "resolvers": [
+          {
+            "path": [
+              "item"
+            ],
+            "parentType": "Query",
+            "fieldName": "item",
+            "returnType": "ItemResponse!",
+            "startOffset": 90956,
+            "duration": 52556414
+          },
+          {
+            "path": [
+              "item",
+              "status"
+            ],
+            "parentType": "ItemResponse",
+            "fieldName": "status",
+            "returnType": "ItemStatus!",
+            "startOffset": 52664920,
+            "duration": 4900
+          },
+          {
+            "path": [
+              "item",
+              "result"
+            ],
+            "parentType": "ItemResponse",
+            "fieldName": "result",
+            "returnType": "Item",
+            "startOffset": 52672121,
+            "duration": 2963
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "id"
+            ],
+            "parentType": "Item",
+            "fieldName": "id",
+            "returnType": "ID!",
+            "startOffset": 52697535,
+            "duration": 966
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "title"
+            ],
+            "parentType": "Item",
+            "fieldName": "title",
+            "returnType": "String!",
+            "startOffset": 52700474,
+            "duration": 659
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "description"
+            ],
+            "parentType": "Item",
+            "fieldName": "description",
+            "returnType": "String!",
+            "startOffset": 52701997,
+            "duration": 493
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "path"
+            ],
+            "parentType": "Item",
+            "fieldName": "path",
+            "returnType": "String!",
+            "startOffset": 52703852,
+            "duration": 618
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "locality"
+            ],
+            "parentType": "Item",
+            "fieldName": "locality",
+            "returnType": "String",
+            "startOffset": 52705195,
+            "duration": 544
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "price"
+            ],
+            "parentType": "Item",
+            "fieldName": "price",
+            "returnType": "Float!",
+            "startOffset": 52706723,
+            "duration": 1203
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "originalPrice"
+            ],
+            "parentType": "Item",
+            "fieldName": "originalPrice",
+            "returnType": "Float",
+            "startOffset": 52709230,
+            "duration": 657
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "currency"
+            ],
+            "parentType": "Item",
+            "fieldName": "currency",
+            "returnType": "String!",
+            "startOffset": 52710553,
+            "duration": 1217
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media"
+            ],
+            "parentType": "Item",
+            "fieldName": "media",
+            "returnType": "[Media!]!",
+            "startOffset": 52712519,
+            "duration": 3140
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media",
+              0,
+              "id"
+            ],
+            "parentType": "Media",
+            "fieldName": "id",
+            "returnType": "ID!",
+            "startOffset": 52720013,
+            "duration": 686
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media",
+              0,
+              "width"
+            ],
+            "parentType": "Media",
+            "fieldName": "width",
+            "returnType": "Int!",
+            "startOffset": 52721396,
+            "duration": 901
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media",
+              0,
+              "height"
+            ],
+            "parentType": "Media",
+            "fieldName": "height",
+            "returnType": "Int!",
+            "startOffset": 52724049,
+            "duration": 651
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media",
+              0,
+              "title"
+            ],
+            "parentType": "Media",
+            "fieldName": "title",
+            "returnType": "String!",
+            "startOffset": 52726026,
+            "duration": 466
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media",
+              1,
+              "id"
+            ],
+            "parentType": "Media",
+            "fieldName": "id",
+            "returnType": "ID!",
+            "startOffset": 52729839,
+            "duration": 543
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media",
+              1,
+              "width"
+            ],
+            "parentType": "Media",
+            "fieldName": "width",
+            "returnType": "Int!",
+            "startOffset": 52731053,
+            "duration": 752
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media",
+              1,
+              "height"
+            ],
+            "parentType": "Media",
+            "fieldName": "height",
+            "returnType": "Int!",
+            "startOffset": 52732915,
+            "duration": 571
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "media",
+              1,
+              "title"
+            ],
+            "parentType": "Media",
+            "fieldName": "title",
+            "returnType": "String!",
+            "startOffset": 52734559,
+            "duration": 419
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "location"
+            ],
+            "parentType": "Item",
+            "fieldName": "location",
+            "returnType": "Geo!",
+            "startOffset": 52737185,
+            "duration": 1872
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "location",
+              "latitude"
+            ],
+            "parentType": "Geo",
+            "fieldName": "latitude",
+            "returnType": "Float",
+            "startOffset": 52742515,
+            "duration": 742
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "location",
+              "longitude"
+            ],
+            "parentType": "Geo",
+            "fieldName": "longitude",
+            "returnType": "Float",
+            "startOffset": 52744033,
+            "duration": 446
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "startDate"
+            ],
+            "parentType": "Item",
+            "fieldName": "startDate",
+            "returnType": "Float",
+            "startOffset": 52746490,
+            "duration": 638
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "modifiedDate"
+            ],
+            "parentType": "Item",
+            "fieldName": "modifiedDate",
+            "returnType": "Float",
+            "startOffset": 52748594,
+            "duration": 671
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "distance"
+            ],
+            "parentType": "Item",
+            "fieldName": "distance",
+            "returnType": "Float",
+            "startOffset": 52750044,
+            "duration": 819
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user"
+            ],
+            "parentType": "Item",
+            "fieldName": "user",
+            "returnType": "UserSummary!",
+            "startOffset": 52752376,
+            "duration": 2531
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "id"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "id",
+            "returnType": "ID!",
+            "startOffset": 52761215,
+            "duration": 728
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "name"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "name",
+            "returnType": "String!",
+            "startOffset": 52762528,
+            "duration": 520
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "avatar"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "avatar",
+            "returnType": "Avatar",
+            "startOffset": 52764043,
+            "duration": 1249
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "avatar",
+              "id"
+            ],
+            "parentType": "Avatar",
+            "fieldName": "id",
+            "returnType": "ID!",
+            "startOffset": 52769287,
+            "duration": 911
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "avatar",
+              "width"
+            ],
+            "parentType": "Avatar",
+            "fieldName": "width",
+            "returnType": "Int",
+            "startOffset": 52770951,
+            "duration": 686
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "avatar",
+              "height"
+            ],
+            "parentType": "Avatar",
+            "fieldName": "height",
+            "returnType": "Int",
+            "startOffset": 52772783,
+            "duration": 607
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "avatar",
+              "isDefault"
+            ],
+            "parentType": "Avatar",
+            "fieldName": "isDefault",
+            "returnType": "Boolean!",
+            "startOffset": 52774457,
+            "duration": 544
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "language"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "language",
+            "returnType": "String!",
+            "startOffset": 52776964,
+            "duration": 629
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "locale"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "locale",
+            "returnType": "String!",
+            "startOffset": 52778332,
+            "duration": 441
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "signupDate"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "signupDate",
+            "returnType": "Float",
+            "startOffset": 52779624,
+            "duration": 424
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "proSellerVertical"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "proSellerVertical",
+            "returnType": "ProSellerVertical",
+            "startOffset": 52780944,
+            "duration": 561
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "avgRating"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "avgRating",
+            "returnType": "Float!",
+            "startOffset": 52782004,
+            "duration": 559
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "numRatings"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "numRatings",
+            "returnType": "Int!",
+            "startOffset": 52783150,
+            "duration": 637
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "numItemsSold"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "numItemsSold",
+            "returnType": "Int!",
+            "startOffset": 52784860,
+            "duration": 563
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "numItemsBought"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "numItemsBought",
+            "returnType": "Int!",
+            "startOffset": 52786548,
+            "duration": 464
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "numItemsSelling"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "numItemsSelling",
+            "returnType": "Int!",
+            "startOffset": 52787747,
+            "duration": 563
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "user",
+              "isProSeller"
+            ],
+            "parentType": "UserSummary",
+            "fieldName": "isProSeller",
+            "returnType": "Boolean!",
+            "startOffset": 52789670,
+            "duration": 538
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "buyer"
+            ],
+            "parentType": "Item",
+            "fieldName": "buyer",
+            "returnType": "UserSummary",
+            "startOffset": 52797143,
+            "duration": 1041
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "numLikes"
+            ],
+            "parentType": "Item",
+            "fieldName": "numLikes",
+            "returnType": "Int!",
+            "startOffset": 52799012,
+            "duration": 680
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "isNew"
+            ],
+            "parentType": "Item",
+            "fieldName": "isNew",
+            "returnType": "Boolean!",
+            "startOffset": 52800403,
+            "duration": 616
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "isSold"
+            ],
+            "parentType": "Item",
+            "fieldName": "isSold",
+            "returnType": "Boolean!",
+            "startOffset": 52801691,
+            "duration": 560
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "isFree"
+            ],
+            "parentType": "Item",
+            "fieldName": "isFree",
+            "returnType": "Boolean!",
+            "startOffset": 52802795,
+            "duration": 501
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "isOnSale"
+            ],
+            "parentType": "Item",
+            "fieldName": "isOnSale",
+            "returnType": "Boolean!",
+            "startOffset": 52803867,
+            "duration": 519
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "isLiked"
+            ],
+            "parentType": "Item",
+            "fieldName": "isLiked",
+            "returnType": "Boolean!",
+            "startOffset": 52805093,
+            "duration": 482
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "isWatched"
+            ],
+            "parentType": "Item",
+            "fieldName": "isWatched",
+            "returnType": "Boolean!",
+            "startOffset": 52819586,
+            "duration": 428
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "isBoosted"
+            ],
+            "parentType": "Item",
+            "fieldName": "isBoosted",
+            "returnType": "Boolean!",
+            "startOffset": 52820615,
+            "duration": 506
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "isShippable"
+            ],
+            "parentType": "Item",
+            "fieldName": "isShippable",
+            "returnType": "Boolean!",
+            "startOffset": 52821745,
+            "duration": 423
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "category"
+            ],
+            "parentType": "Item",
+            "fieldName": "category",
+            "returnType": "[String!]!",
+            "startOffset": 52822760,
+            "duration": 846
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "customProperties"
+            ],
+            "parentType": "Item",
+            "fieldName": "customProperties",
+            "returnType": "[CustomPropertyEntry!]",
+            "startOffset": 52824979,
+            "duration": 937
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "od"
+            ],
+            "parentType": "Item",
+            "fieldName": "od",
+            "returnType": "String",
+            "startOffset": 52826462,
+            "duration": 539
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "metadata"
+            ],
+            "parentType": "Item",
+            "fieldName": "metadata",
+            "returnType": "[ItemMetadata!]!",
+            "startOffset": 52840443,
+            "duration": 2002
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "activityGroup"
+            ],
+            "parentType": "Item",
+            "fieldName": "activityGroup",
+            "returnType": "ActivityGroup",
+            "startOffset": 52843180,
+            "duration": 1712
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "activityGroup",
+              "id"
+            ],
+            "parentType": "ActivityGroup",
+            "fieldName": "id",
+            "returnType": "ID!",
+            "startOffset": 52847754,
+            "duration": 683
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "activityGroup",
+              "kind"
+            ],
+            "parentType": "ActivityGroup",
+            "fieldName": "kind",
+            "returnType": "ActivityGroupKind!",
+            "startOffset": 52861509,
+            "duration": 817
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "latestActivities"
+            ],
+            "parentType": "Item",
+            "fieldName": "latestActivities",
+            "returnType": "[ActivityKindUnion!]!",
+            "startOffset": 52863829,
+            "duration": 879
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities"
+            ],
+            "parentType": "Item",
+            "fieldName": "allowedActivities",
+            "returnType": "ItemAllowedActivities",
+            "startOffset": 52865512,
+            "duration": 1528
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "canAskQuestions"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "canAskQuestions",
+            "returnType": "Boolean!",
+            "startOffset": 52873054,
+            "duration": 1388
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "answerQuestions"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "answerQuestions",
+            "returnType": "[String!]",
+            "startOffset": 52875202,
+            "duration": 620
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "removeQuestions"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "removeQuestions",
+            "returnType": "[String!]",
+            "startOffset": 52876675,
+            "duration": 622
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "removeAnswers"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "removeAnswers",
+            "returnType": "[String!]",
+            "startOffset": 52878361,
+            "duration": 585
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "canDelistItem"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "canDelistItem",
+            "returnType": "Boolean!",
+            "startOffset": 52880198,
+            "duration": 484
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "canMarkAsSoldElsewhere"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "canMarkAsSoldElsewhere",
+            "returnType": "Boolean!",
+            "startOffset": 52881495,
+            "duration": 453
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "canEdit"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "canEdit",
+            "returnType": "Boolean!",
+            "startOffset": 52882547,
+            "duration": 450
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "editableFields"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "editableFields",
+            "returnType": "[String!]!",
+            "startOffset": 52883451,
+            "duration": 635
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "canAddItemToWatchList"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "canAddItemToWatchList",
+            "returnType": "Boolean!",
+            "startOffset": 52884826,
+            "duration": 388
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "canDialNumber"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "canDialNumber",
+            "returnType": "Boolean!",
+            "startOffset": 52885740,
+            "duration": 397
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "canReportItem"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "canReportItem",
+            "returnType": "Boolean!",
+            "startOffset": 52886622,
+            "duration": 366
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "allowedActivities",
+              "canBuyNow"
+            ],
+            "parentType": "ItemAllowedActivities",
+            "fieldName": "canBuyNow",
+            "returnType": "Boolean!",
+            "startOffset": 52887830,
+            "duration": 367
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "countQuestions"
+            ],
+            "parentType": "Item",
+            "fieldName": "countQuestions",
+            "returnType": "Int!",
+            "startOffset": 52889158,
+            "duration": 485
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "countAnswers"
+            ],
+            "parentType": "Item",
+            "fieldName": "countAnswers",
+            "returnType": "Int!",
+            "startOffset": 52890459,
+            "duration": 434
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "questions"
+            ],
+            "parentType": "Item",
+            "fieldName": "questions",
+            "returnType": "[Question!]",
+            "startOffset": 52891464,
+            "duration": 786
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "paymentOptions"
+            ],
+            "parentType": "Item",
+            "fieldName": "paymentOptions",
+            "returnType": "PaymentOptions!",
+            "startOffset": 52892914,
+            "duration": 1393
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "paymentOptions",
+              "isBuyNow"
+            ],
+            "parentType": "PaymentOptions",
+            "fieldName": "isBuyNow",
+            "returnType": "Boolean!",
+            "startOffset": 52896370,
+            "duration": 671
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "showPaymentSummary"
+            ],
+            "parentType": "Item",
+            "fieldName": "showPaymentSummary",
+            "returnType": "Boolean!",
+            "startOffset": 52897945,
+            "duration": 499
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "paymentSummary"
+            ],
+            "parentType": "Item",
+            "fieldName": "paymentSummary",
+            "returnType": "[PaymentSummary!]",
+            "startOffset": 52898943,
+            "duration": 799
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "parcel"
+            ],
+            "parentType": "Item",
+            "fieldName": "parcel",
+            "returnType": "Parcel",
+            "startOffset": 52900227,
+            "duration": 903
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "adKeywords"
+            ],
+            "parentType": "Item",
+            "fieldName": "adKeywords",
+            "returnType": "[String!]!",
+            "startOffset": 52901758,
+            "duration": 1197
+          },
+          {
+            "path": [
+              "item",
+              "result",
+              "canonicalURL"
+            ],
+            "parentType": "Item",
+            "fieldName": "canonicalURL",
+            "returnType": "String!",
+            "startOffset": 52905312,
+            "duration": 486
+          }
+        ]
+      }
+    },
+    "reqId": "9d3b4302-fe44-45a5-b9c1-7b7660b538e8"
+  }
+}
