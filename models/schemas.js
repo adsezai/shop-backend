@@ -78,7 +78,10 @@ const user = new mongoose.Schema({
     required: true
   },
   lastname: String,
-  avatar: {},
+  avatar: {
+    id: String,
+    size: String
+  },
   language: String,
   locale: String,
   signupDate: {
