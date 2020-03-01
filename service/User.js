@@ -1,4 +1,4 @@
-const { User: UserModel, Item: ItemModel } = require('../lib/db/schemas/schemas')
+const { User: UserModel, Item: ItemModel } = require('../models/schemas')
 const { userConstraints: userConst, userProperties: userProp } = require('../global/const')
 const { errorMaxItemsReached, errorUserHasNotItem } = require('../global/errors')
 
@@ -20,6 +20,15 @@ class UserService {
     user[userProp.ITEMSREF].includes(itemId) || errorUserHasNotItem(user)
 
     ItemModel.deleteOne({ _id: itemId })
+    // TODO Remove item from user itemRef
+  }
+  async updateItem () {
+
+  }
+
+  async getUser (userId) {
+    let user = await UserModel.findById(userId)
+    return user
   }
 }
 

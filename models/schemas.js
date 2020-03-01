@@ -10,6 +10,7 @@ const item = new mongoose.Schema({
     type: String,
     required: true
   },
+  owner: String,
   description: String,
   price: {
     type: Number,

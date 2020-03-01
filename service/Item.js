@@ -1,10 +1,10 @@
-const { Item } = require('../lib/db/schemas/schemas')
+const { Item: ItemModel } = require('../models/schemas')
 
 class ItemService {
-  async createNewItem (itemObj) {
-    let item = new Item(itemObj)
-    await item.save()
+  async getItem (itemId) {
+    let item = await ItemModel.findById(itemId)
+    return item
   }
 }
 
-module.exports = new Item()
+module.exports = new ItemService()
