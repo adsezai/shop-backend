@@ -3,8 +3,14 @@ const { userConstraints: userConst, userProperties: userProp } = require('../glo
 const { errorMaxItemsReached, errorUserHasNotItem } = require('../global/errors')
 
 class UserService {
+  async createNewUser (user) {
+    let newUser = new UserModel(user)
+    return newUser.save()
+  }
+
   async addNewItem (userId, item) {
     let user = await UserModel.findById(userId)
+    // check if user can add more items
     user[userProp.PREMIUM] || user[userProp.NUMITEMSONLINE] <= userConst.MAXITEMS || errorMaxItemsReached()
 
     let newItem = new ItemModel(item)
@@ -16,11 +22,14 @@ class UserService {
 
   async deleteItem (userId, itemId) {
     let user = await UserModel.findById(userId)
+    let itemPositionInUserRefs = user[userProp.ITEMSREF].indexOf(itemId)
 
-    user[userProp.ITEMSREF].includes(itemId) || errorUserHasNotItem(user)
+    itemPositionInUserRefs !== -1 || errorUserHasNotItem(user)
 
     ItemModel.deleteOne({ _id: itemId })
-    // TODO Remove item from user itemRef
+
+    user.itemRefs.splice(itemPositionInUserRefs, 1)
+    await user.save()
   }
   async updateItem () {
 

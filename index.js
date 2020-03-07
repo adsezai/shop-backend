@@ -1,7 +1,12 @@
+const express = require('express')
+const app = express()
+const itemRouter = require('./routes/ItemRouter')
+
 const config = require('config')
 const PORT = config.get('server.port')
 
-const app = require('./graphql/graphql')
+app.use('/items', itemRouter)
+// const app = require('./graphql/graphql')
 
 const connection = require('./models/mongo')
 

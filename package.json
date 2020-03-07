@@ -3,8 +3,16 @@
   "version": "0.0.1",
   "description": "shop backend",
   "main": "index.js",
+  "standard": {
+    "globals":[
+      "test"
+    ]
+  },
+  "jest":{
+    "testEnvironment": "node"
+  },
   "scripts": {
-    "test": "mocha test"
+    "test": "jest"
   },
   "author": "Adis Sezairi",
   "license": "ISC",
@@ -16,5 +24,8 @@
     "js-yaml": "^3.13.1",
     "mongoose": "^5.9.2",
     "uuid": "^7.0.1"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
   }
 }

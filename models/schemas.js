@@ -40,6 +40,7 @@ const item = new mongoose.Schema({
   updateDate: {
     type: Date
   },
+  viewedBy: [String],
   distance: Number,
   buyer: String,
   numLikes: 0,

@@ -47,6 +47,7 @@ let ItemType = new GraphQLObjectType({
     price: { type: GraphQLFloat },
     originalPrice: { type: GraphQLFloat },
     locality: { type: GraphQLString },
+    viewedBy: { type: GraphQLList(GraphQLString) },
     createDate: { type: GraphQLString },
     user: {
       type: UserType,
