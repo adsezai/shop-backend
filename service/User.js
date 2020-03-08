@@ -35,6 +35,11 @@ class UserService {
 
   }
 
+  async getItemsByUser (userId) {
+    let userItems = ItemModel.find({ owner: userId })
+    return userItems
+  }
+
   async getUser (userId) {
     let user = await UserModel.findById(userId)
     return user

@@ -13,7 +13,7 @@ class ItemService {
   }
 
   async getItemsPaginated (page, limit, sort, filter) {
-    let items = await ItemModel.find({}, 'title description price currency location', { skip: 0, limit: 20 })
+    let items = await ItemModel.find({}, 'title description price currency location', { skip: page || 0, limit: limit || 10 })
     return items
   }
 }
