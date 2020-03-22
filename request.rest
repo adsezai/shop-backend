@@ -18,11 +18,12 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/login/
+POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "username":"Adis"
+  "email":"asda@asda.de",
+  "password": "123456"
 }
 
 ###

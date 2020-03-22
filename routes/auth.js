@@ -1,28 +1,15 @@
+require('dotenv').config()
 const express = require('express')
 const router = express.Router()
 const userService = require('../service/User')
-
-require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const passport = require('passport')
 
-const posts = [
-  {
-    'username': 'Adis',
-    'text': 'hallo'
-  },
-  {
-    'username': 'Mustermann',
-    'text': 'cao'
-  }
-]
+const initializtePassport = require('../passport-config')
+initializtePassport(passport)
 
-router.get('/posts', authenticateToken, (req, res) => {
-  console.log(req.user.username)
-  res.json(posts.filter(post => post.username === req.user.username))
-})
-
-router.post('/login', (req, res) => {
+/* router.post('/login', (req, res) => {
   const username = req.body.username
   const user = { username: username }
 
@@ -30,7 +17,11 @@ router.post('/login', (req, res) => {
   const refreshToken = generateRefreshToken(user)
   refreshTokens.push(refreshToken)
   res.json({ accessToken, refreshToken })
-})
+}) */
+
+router.post('/login', passport.authenticate('local', {
+  session: false
+}))
 
 router.post('/register', async (req, res) => {
   // check if email alredy exists
