@@ -74,6 +74,15 @@ const user = new mongoose.Schema({
     type: String,
     default: uuid.v4
   },
+  email: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
   firstname: {
     type: String,
     required: true
