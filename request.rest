@@ -24,3 +24,13 @@ Content-Type: application/json
 {
   "username":"Adis"
 }
+
+###
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "firstname":"Adis",
+  "email": "12345@asda.de",
+  "password": "123456"
+}

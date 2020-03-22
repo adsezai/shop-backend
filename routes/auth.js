@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const userService = require('../service/User')
 
 require('dotenv').config()
-
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const posts = [
@@ -21,7 +22,7 @@ router.get('/posts', authenticateToken, (req, res) => {
   res.json(posts.filter(post => post.username === req.user.username))
 })
 
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
   const username = req.body.username
   const user = { username: username }
 
@@ -29,6 +30,20 @@ router.post('/', (req, res) => {
   const refreshToken = generateRefreshToken(user)
   refreshTokens.push(refreshToken)
   res.json({ accessToken, refreshToken })
+})
+
+router.post('/register', async (req, res) => {
+  // check if email alredy exists
+  const user = await userService.getUserByEmail(req.body.email)
+  if (user) return res.sendStatus(403)
+
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    userService.createNewUser({ firstname: req.body.firstname, email: req.body.email, password: hashedPassword })
+    res.json({ message: 'registered' })
+  } catch (error) {
+    res.sendStatus(500)
+  }
 })
 
 let refreshTokens = []

@@ -40,6 +40,11 @@ class UserService {
     return userItems
   }
 
+  async getUserByEmail (email) {
+    let user = await UserModel.findOne({ email: email })
+    return user
+  }
+
   async getUser (userId) {
     let user = await UserModel.findById(userId)
     return user
