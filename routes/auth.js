@@ -19,22 +19,20 @@ initializtePassport(passport)
   res.json({ accessToken, refreshToken })
 }) */
 
-router.post('/login', passport.authenticate('local', {
-  session: false
-}))
+router.post('/login', passport.authenticate('login', { session: false }), (req, res) => {
+  // if auth was successfull user is userObj
+  res.json({
+    message: 'sigup success',
+    user: req.user
+  })
+})
 
-router.post('/register', async (req, res) => {
-  // check if email alredy exists
-  const user = await userService.getUserByEmail(req.body.email)
-  if (user) return res.sendStatus(403)
-
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    userService.createNewUser({ firstname: req.body.firstname, email: req.body.email, password: hashedPassword })
-    res.json({ message: 'registered' })
-  } catch (error) {
-    res.sendStatus(500)
-  }
+router.post('/register', async (req, res, next) => {
+  passport.authenticate('register', { session: false }, (error, user, info) => {
+    if (error) return res.sendStatus(500) // server error
+    if (!user) return res.sendStatus(403) // user already exists
+    return res.json({ message: 'registered' }) // successfully created
+  })(req, res, next)
 })
 
 let refreshTokens = []
