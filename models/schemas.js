@@ -22,8 +22,8 @@ const item = new mongoose.Schema({
   },
   locality: String,
   currency: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   location: {
     latitude: {

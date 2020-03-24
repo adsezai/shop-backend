@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express()
+const { handleErrorMiddleware } = require('./global/errors')
 const itemRouter = require('./routes/ItemRouter')
 const userRouter = require('./routes/UserRouter')
-const loginRouter = require('./routes/auth')
+const loginRouter = require('./routes/signInRouter')
 const passport = require('passport')
 
 const config = require('config')
@@ -14,6 +15,8 @@ app.use(passport.initialize())
 app.use('/items', itemRouter)
 app.use('/users', userRouter)
 app.use('/', loginRouter)
+
+app.use((err, req, res, next) => handleErrorMiddleware(err, res))
 
 // const app = require('./graphql/graphql')
 

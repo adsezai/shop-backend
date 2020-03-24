@@ -7,6 +7,14 @@ class ItemService {
     return item
   }
 
+  async getItemOwner (itemId) {
+    return ItemModel.findById(itemId, 'owner')
+  }
+
+  async deleteItem (itemId) {
+    return ItemModel.findByIdAndDelete(itemId)
+  }
+
   async updateItemViewedBy (item, userId) {
     item.viewedBy.push(userId)
     return item.save()

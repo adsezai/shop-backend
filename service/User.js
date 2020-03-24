@@ -9,15 +9,18 @@ class UserService {
   }
 
   async addNewItem (userId, item) {
+    console.log('user')
     let user = await UserModel.findById(userId)
+    console.log(user)
     // check if user can add more items
     user[userProp.PREMIUM] || user[userProp.NUMITEMSONLINE] <= userConst.MAXITEMS || errorMaxItemsReached()
 
+    item.owner = userId
     let newItem = new ItemModel(item)
     const itm = await newItem.save()
 
     user[userProp.ITEMSREF].push(itm._id)
-    await user.save()
+    return user.save()
   }
 
   async deleteItem (userId, itemId) {

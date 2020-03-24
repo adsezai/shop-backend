@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const { authenticateToken } = require('../service/Auth')
 
-const itemService = require('../service/Item')
 const userService = require('../service/User')
 
 router.get('/user/:userId', async (req, res, next) => res.send(await userService.getUser(req.params.userId)))

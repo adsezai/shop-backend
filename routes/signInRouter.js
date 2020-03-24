@@ -1,22 +1,20 @@
-require('dotenv').config()
 const express = require('express')
 const router = express.Router()
-const jwt = require('jsonwebtoken')
+const { authenticateToken, generateAccessToken, generateRefreshToken } = require('../service/Auth')
+
 const passport = require('passport')
+const initializePassport = require('../passport-config')
 
-const ACCESS_TOKEN_EXIPIRE_TIME = '10m'
-const REFRESH_TOKEN_EXIPIRE_TIME = '7d'
-
-const initializtePassport = require('../passport-config')
-initializtePassport(passport)
+initializePassport(passport)
 
 router.post('/login', passport.authenticate('login', { session: false }), (req, res) => {
   // if auth was successfull user is userObj
   const tokenBody = { user: req.user.id, email: req.user.email }
   const accessToken = generateAccessToken(tokenBody)
+  const refreshToken = generateRefreshToken(tokenBody)
 
   res.header('Authorization', `Bearer ${accessToken}`)
-  res.json({ accessToken })
+  res.json({ refreshToken })
 })
 
 router.post('/register', async (req, res, next) => {
@@ -32,7 +30,7 @@ router.post('/secureroute', authenticateToken, (req, res, next) => {
   res.send('passed')
 })
 
-router.post('/token', (req, res) => {
+/* router.post('/token', (req, res) => {
   const refreshToken = req.body.token
   if (!refreshToken) return res.sendStatus(401)
   if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
@@ -46,29 +44,6 @@ router.post('/token', (req, res) => {
 router.delete('/delete', (req, res) => {
   refreshTokens = refreshTokens.filter(token => token !== req.body.token)
   res.sendStatus(204)
-})
-
-function generateAccessToken (user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: TOKEN_EXIPIRE_TIME })
-}
-function generateRefreshToken (user) {
-  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: TOKEN_EXIPIRE_TIME })
-}
-
-function authenticateToken (req, res, next) {
-  const authHeader = req.headers['authorization']
-
-  // Token is in header in the form [Bearer, TOKEN]
-  const token = authHeader && authHeader.split(' ')[1]
-  if (!token) return res.sendStatus(401)
-
-  try {
-    const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-    req.user = user
-    next()
-  } catch (error) {
-    return res.sendStatus(403)
-  }
-}
+}) */
 
 module.exports = router

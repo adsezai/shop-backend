@@ -29,9 +29,9 @@ async function registerHandler (req, email, password, done) {
   }
 }
 
-function initialize (passport) {
+function initializePassport (passport) {
   passport.use('register', new LocalStrategy({ usernameField: 'email', passwordField: 'password', passReqToCallback: true }, registerHandler))
   passport.use('login', new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, loginHander))
 }
 
-module.exports = initialize
+module.exports = initializePassport
