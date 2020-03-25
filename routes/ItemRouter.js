@@ -15,13 +15,12 @@ router.post('/paginated', async (req, res, next) => {
 })
 
 router.post('/item/', authenticateToken, async (req, res, next) => {
-  console.log('post iten')
   // add new item
   try {
     const userId = req.user.user
     const item = req.body
-    await userService.addNewItem(userId, item)
-    return res.json({ 'ok': 'ok' })
+    const newItem = await userService.addNewItem(userId, item)
+    return res.json({ item: newItem })
   } catch (error) {
     console.error(error)
     next(error)
@@ -32,8 +31,8 @@ router.put('/item/:itemId', authenticateToken, async (req, res, next) => {
   try {
     const itemId = req.params.itemId
     const updateFields = req.body
-    await userService.updateItem(req.user.user, itemId, updateFields)
-    res.json({ 'ok': 'updated' })
+    const item = await userService.updateItem(req.user.user, itemId, updateFields)
+    res.json({ item })
   } catch (error) {
     console.error()
     next(error)

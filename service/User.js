@@ -11,14 +11,16 @@ class UserService {
   async addNewItem (userId, item) {
     let user = await UserModel.findById(userId)
     // check if user can add more items
-    user[userProp.PREMIUM] || user[userProp.NUMITEMSONLINE] <= userConst.MAXITEMS || errorMaxItemsReached()
+    user[userProp.PREMIUM] || user[userProp.NUMITEMSONLINE] < userConst.MAXITEMS || errorMaxItemsReached()
 
     item.owner = userId
     let newItem = new ItemModel(item)
     const itm = await newItem.save()
 
     user[userProp.ITEMSREF].push(itm._id)
-    return user.save()
+    user[userProp.NUMITEMSONLINE]++
+    await user.save()
+    return itm
   }
 
   async deleteItem (userId, itemId) {
@@ -31,6 +33,7 @@ class UserService {
     console.log('Deleted Item', res)
     res.deletedCount > 0 || errorItemDoesNotExist(itemId)
     user.itemsRef.splice(itemPositionInUserRefs, 1)
+    user[userProp.NUMITEMSONLINE]--
     await user.save()
   }
 
@@ -39,7 +42,7 @@ class UserService {
     user[userProp.ITEMSREF].includes(itemId) || errorUserHasNotItem(user)
 
     // return item before update
-    let item = await ItemModel.findByIdAndUpdate(itemId, updateFields, { useFindAndModify: false }) || errorItemDoesNotExist(itemId)
+    let item = await ItemModel.findByIdAndUpdate(itemId, updateFields, { useFindAndModify: false, new: true }) || errorItemDoesNotExist(itemId)
     console.log(item)
     return item
   }
