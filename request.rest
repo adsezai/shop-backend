@@ -1,28 +1,9 @@
-GET http://localhost:8080/login/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkaXMiLCJpYXQiOjE1ODQ4OTU3MTMsImV4cCI6MTU4NDg5NTcxOH0.oE715V00gIDNYrT521Co47Z365y1RLgzmBpF2w0b1OU
-###
 
-DELETE http://localhost:8080/login/delete
-Content-Type: application/json
-
-{
-  "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkaXMiLCJpYXQiOjE1ODQ4OTY0MjV9.T368ATj3ZlAGbICN4Pt7QXes_ldE4ANXKJXlMY7RQ3E"
-}
-
-###
-POST http://localhost:8080/login/token
-Content-Type: application/json
-
-{
-  "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkaXMiLCJpYXQiOjE1ODQ4OTY0MjV9.T368ATj3ZlAGbICN4Pt7QXes_ldE4ANXKJXlMY7RQ3E"
-}
-
-###
 POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email":"asda@asda.de",
+  "email":"adis2@gmail.de",
   "password": "123456"
 }
 
@@ -32,6 +13,30 @@ Content-Type: application/json
 
 {
   "firstname":"Adis",
-  "email": "12345@asda.de",
+  "email": "adis2@gmail.de",
   "password": "123456"
+}
+
+###
+DELETE http://localhost:8080/items/item/7b7b158f-699b-40ca-8482-9ad271449bd5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2Njc3OSwiZXhwIjoxNTg1MTY3Mzc5fQ.92vQARlYttEJ_k6BGY8KehS2gveIaJ5PSp5b-rvShGc
+
+###
+POST http://localhost:8080/items/item/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2Njc3OSwiZXhwIjoxNTg1MTY3Mzc5fQ.92vQARlYttEJ_k6BGY8KehS2gveIaJ5PSp5b-rvShGc
+Content-Type: application/json
+
+{
+  "title":"Buch",
+  "price": 10
+}
+###
+
+PUT http://localhost:8080/items/item/ce77db12-4a3a-4c8d-bb5e-3d5415e83ecb
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2NTkyOCwiZXhwIjoxNTg1MTY2NTI4fQ.97Z27zGeDvh2CQ3pH-Q3uQQ26D82KIUYWfVllTbmHcc
+Content-Type: application/json
+
+{
+  "title":"Buch",
+  "numLikes": 12
 }

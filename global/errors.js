@@ -26,7 +26,7 @@ const handleError = (err, res) => {
 
 module.exports = {
   errorMaxItemsReached: () => throwHTTPError(403, `Max count items reached`),
-  errorUserHasNotItem: () => throwError(`Error: This user is not owner of the Item`),
+  errorUserHasNotItem: () => throwHTTPError(404, `User has no Item with this ID.`),
   errorItemDoesNotExist: (itemId) => throwHTTPError(404, `Item ${itemId} does not exist`),
   handleErrorMiddleware: handleError
 }

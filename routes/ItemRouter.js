@@ -28,16 +28,22 @@ router.post('/item/', authenticateToken, async (req, res, next) => {
   }
 })
 
-router.delete('/item/:itemId', authenticateToken, async (req, res, next) => {
-  const itemId = req.params.itemId
-  // get owner of item
+router.put('/item/:itemId', authenticateToken, async (req, res, next) => {
   try {
-    const owner = await itemService.getItemOwner(itemId)
-    owner || errorItemDoesNotExist(itemId)
-    // check if owner and user.id is same
-    if (owner === req.user.id) return res.sendStatus(403)
-    // delete item
-    await itemService.deleteItem(itemId)
+    const itemId = req.params.itemId
+    const updateFields = req.body
+    await userService.updateItem(req.user.user, itemId, updateFields)
+    res.json({ 'ok': 'updated' })
+  } catch (error) {
+    console.error()
+    next(error)
+  }
+})
+
+router.delete('/item/:itemId', authenticateToken, async (req, res, next) => {
+  try {
+    const itemId = req.params.itemId
+    await userService.deleteItem(req.user.user, itemId)
     return res.json({ id: itemId })
   } catch (error) {
     console.error(error)
