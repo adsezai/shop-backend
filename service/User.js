@@ -61,6 +61,32 @@ class UserService {
     let user = await UserModel.findById(userId)
     return user
   }
+
+  // TODO what if some items have been deleted?
+  async getFavoriteItems (userId) {
+    const user = await UserModel.findById(userId)
+    const itemIds = user.favoriteItems
+
+    const items = await ItemModel.find().where('_id').in(itemIds).exec()
+
+    if (user.favoriteItems.length !== items.length) {
+      user.favoriteItems = items.map(i => i._id)
+      await user.save()
+    }
+
+    return items
+  }
+
+  async addFavorite (userId, itemId) {
+    await ItemModel.findById(itemId) || errorItemDoesNotExist(itemId)
+    return UserModel.findByIdAndUpdate(userId, { $addToSet: { favoriteItems: itemId } }, { useFindAndModify: false })
+  }
+
+  async deleteFavorite (userId, itemId) {
+    // FIXME what if item is deleted but still in favoritelist
+    // await ItemModel.findById(itemId) || errorItemDoesNotExist(itemId)
+    return UserModel.findByIdAndUpdate(userId, { $pullAll: { favoriteItems: [itemId] } }, { useFindAndModify: false })
+  }
 }
 
 module.exports = new UserService()

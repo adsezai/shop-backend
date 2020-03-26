@@ -18,12 +18,12 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/items/item/7b7b158f-699b-40ca-8482-9ad271449bd5
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2Njc3OSwiZXhwIjoxNTg1MTY3Mzc5fQ.92vQARlYttEJ_k6BGY8KehS2gveIaJ5PSp5b-rvShGc
+DELETE http://localhost:8080/items/item/0b5dae28-e5ac-41b2-b77a-3d37f9114187
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2OTA5OSwiZXhwIjoxNTg1MTY5Njk5fQ.O3quvZ3UwYB71rDVRRrbxYkgzdjoYuvXzQOt8Gafe64
 
 ###
 POST http://localhost:8080/items/item/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2ODQ1NywiZXhwIjoxNTg1MTY5MDU3fQ.4qZY6055AJ0UVSy_WsJ3E6M2kpcMgQt8wtGhTj2-TPk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2OTA5OSwiZXhwIjoxNTg1MTY5Njk5fQ.O3quvZ3UwYB71rDVRRrbxYkgzdjoYuvXzQOt8Gafe64
 Content-Type: application/json
 
 {
@@ -31,12 +31,34 @@ Content-Type: application/json
   "price": 10
 }
 ###
-
-PUT http://localhost:8080/items/item/ce77db12-4a3a-4c8d-bb5e-3d5415e83ecb
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2NTkyOCwiZXhwIjoxNTg1MTY2NTI4fQ.97Z27zGeDvh2CQ3pH-Q3uQQ26D82KIUYWfVllTbmHcc
+###
+PUT http://localhost:8080/items/item/6545433b-4131-407c-93da-9c93b4dc3b42
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2ODQ1NywiZXhwIjoxNTg1MTY5MDU3fQ.4qZY6055AJ0UVSy_WsJ3E6M2kpcMgQt8wtGhTj2-TPk
 Content-Type: application/json
 
 {
-  "title":"Buch",
-  "numLikes": 12
+  "title":"ASD",
+  "numLikes": 12,
+  "price": 1234
+}
+###
+
+GET http://localhost:8080/favorite/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTI1MjE2NSwiZXhwIjoxNTg1MjUyNzY1fQ.S4iL75dJIUn7jLczbRmm7iDdAVbBhyEJOsP1YNXB5ik
+###
+POST http://localhost:8080/favorite/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTI1MjE2NSwiZXhwIjoxNTg1MjUyNzY1fQ.S4iL75dJIUn7jLczbRmm7iDdAVbBhyEJOsP1YNXB5ik
+Content-Type: application/json
+
+{
+  "id": "15e33e3a-0668-4ebd-9cff-3848ef61e70c"
+}
+
+###
+DELETE http://localhost:8080/favorite/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTI1MjE2NSwiZXhwIjoxNTg1MjUyNzY1fQ.S4iL75dJIUn7jLczbRmm7iDdAVbBhyEJOsP1YNXB5ik
+Content-Type: application/json
+
+{
+  "id": "15e33e3a-0668-4ebd-9cff-3848ef61se70c"
 }

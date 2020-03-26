@@ -119,7 +119,11 @@ const user = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  itemsRef: [String]
+  itemsRef: [String],
+  favoriteItems: {
+    type: [String],
+    default: []
+  }
 })
 
 const Item = mongoose.model('Item', item)
