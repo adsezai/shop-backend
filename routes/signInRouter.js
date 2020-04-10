@@ -20,7 +20,7 @@ router.post('/login', passport.authenticate('login', { session: false }), (req, 
 
 router.post('/register', validate('register'), async (req, res, next) => {
   passport.authenticate('register', { session: false }, (error, user, info) => {
-    if (error) return res.sendStatus(500) // server error
+    if (error) return next(error) // res.sendStatus(500) // server error
     if (!user) return res.sendStatus(403) // user already exists
     return res.json({ message: 'registered' }) // successfully created
   })(req, res, next)
