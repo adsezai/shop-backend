@@ -5,7 +5,7 @@ const ACCESS_TOKEN_EXIPIRE_TIME = '10m'
 const REFRESH_TOKEN_EXIPIRE_TIME = '7d'
 
 function authenticateToken (req, res, next) {
-  const authHeader = req.headers['authorization']
+  const authHeader = req.headers.authorization
 
   // Token is in header in the form [Bearer, TOKEN]
   const token = authHeader && authHeader.split(' ')[1]

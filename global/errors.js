@@ -17,7 +17,7 @@ function throwHTTPError (code, msg) {
 
 const handleError = (err, res) => {
   console.log(err)
-  let { statusCode, message } = (err instanceof HTTPError)
+  const { statusCode, message } = (err instanceof HTTPError)
     ? err
     : new HTTPError(500, 'Internal Server Error')
 
@@ -25,8 +25,9 @@ const handleError = (err, res) => {
 }
 
 module.exports = {
-  errorMaxItemsReached: () => throwHTTPError(403, `Max count items reached`),
-  errorUserHasNotItem: () => throwHTTPError(404, `User has no Item with this ID.`),
+  errorMaxItemsReached: () => throwHTTPError(403, 'Max count items reached'),
+  errorUserHasNotItem: () => throwHTTPError(404, 'User has no Item with this ID.'),
   errorItemDoesNotExist: (itemId) => throwHTTPError(404, `Item ${itemId} does not exist`),
+  errorBadRequest: (message) => throwHTTPError(400, message),
   handleErrorMiddleware: handleError
 }

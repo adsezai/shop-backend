@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { authenticateToken, generateAccessToken, generateRefreshToken } = require('../service/Auth')
+const validate = require('../lib/validation/validation')
 
 const passport = require('passport')
 const initializePassport = require('../passport-config')
@@ -17,7 +18,7 @@ router.post('/login', passport.authenticate('login', { session: false }), (req, 
   res.json({ refreshToken })
 })
 
-router.post('/register', async (req, res, next) => {
+router.post('/register', validate('register'), async (req, res, next) => {
   passport.authenticate('register', { session: false }, (error, user, info) => {
     if (error) return res.sendStatus(500) // server error
     if (!user) return res.sendStatus(403) // user already exists

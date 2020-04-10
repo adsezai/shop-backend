@@ -26,4 +26,4 @@ app.use((err, req, res, next) => handleErrorMiddleware(err, res))
 
 const connection = require('./models/mongo')
 
-app.listen(PORT, () => console.log(`Winter is coming, on port ${PORT}`))
+app.listen(PORT, () => console.log(`server started on port ${PORT}`))
