@@ -23,12 +23,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjN
 
 ###
 POST http://localhost:8080/items/item/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2OTA5OSwiZXhwIjoxNTg1MTY5Njk5fQ.O3quvZ3UwYB71rDVRRrbxYkgzdjoYuvXzQOt8Gafe64
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NjcyODUzMiwiZXhwIjoxNTg3NTkyNTMyfQ.ZoF2Z-qkfYUeuQkcLA3lbRD005TDTaOUbXYjbHieF14
 Content-Type: application/json
 
 {
-  "title":"Buch",
-  "price": 10
+  "title":"Golf 4",
+  "price": 4000,
+  "description": "Golf 4 Bj 2004"
 }
 ###
 ###

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { authenticateToken } = require('../service/Auth')
 const { errorItemDoesNotExist } = require('../global/errors')
+const validate = require('../lib/validation/validation')
 
 const itemService = require('../service/Item')
 const userService = require('../service/User')
@@ -14,7 +15,7 @@ router.post('/paginated', async (req, res, next) => {
   res.send(items)
 })
 
-router.post('/item/', authenticateToken, async (req, res, next) => {
+router.post('/item/', authenticateToken, validate('itemcreate'), async (req, res, next) => {
   // add new item
   try {
     const userId = req.user.user
