@@ -1,6 +1,18 @@
 const uuid = require('uuid')
 const mongoose = require('mongoose')
 
+const pointSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Point'],
+    required: true
+  },
+  coordinates: {
+    type: [Number], // always insert longitude
+    required: true
+  }
+})
+
 const item = new mongoose.Schema({
   _id: {
     type: String,
@@ -26,12 +38,7 @@ const item = new mongoose.Schema({
     // required: true
   },
   location: {
-    latitude: {
-      type: Number
-    },
-    longitude: {
-      type: Number
-    }
+    type: pointSchema
   },
   createDate: {
     type: Date,
@@ -126,8 +133,15 @@ const user = new mongoose.Schema({
   }
 })
 
+item.index({ location: '2dsphere' })
+
 const Item = mongoose.model('Item', item)
 const User = mongoose.model('User', user)
+
+Item.on('index', function (error) {
+  console.log('done index')
+  error && console.log(error)
+})
 
 module.exports = {
   Item,

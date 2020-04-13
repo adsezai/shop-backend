@@ -5,7 +5,7 @@ const userProperties = Object.freeze({
 })
 
 const userConstraints = Object.freeze({
-  MAXITEMS: 10
+  MAXITEMS: 30
 })
 
 const itemConstraints = Object.freeze({

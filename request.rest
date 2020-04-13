@@ -27,9 +27,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjN
 Content-Type: application/json
 
 {
-  "title":"Golf 4",
+  "title":"Book",
   "price": 4000,
-  "description": "Golf 4 Bj 2004"
+  "description": "Golf 4 Bj 2004",
+  "location":{
+    "type":"Point",
+  "coordinates": [10.077955, 48.162323]
+  } 
 }
 ###
 ###

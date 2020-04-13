@@ -2,7 +2,7 @@ const { Item: ItemModel } = require('../models/schemas')
 
 class ItemService {
   async getItem (userId, itemId) {
-    let item = await ItemModel.findById(itemId)
+    const item = await ItemModel.findById(itemId)
     if (userId && item.viewedBy.includes(userId)) await this.updateItemViewedBy(item, userId)
     return item
   }
@@ -20,8 +20,19 @@ class ItemService {
     return item.save()
   }
 
-  async getItemsPaginated (page, limit, sort, filter) {
-    let items = await ItemModel.find({}, 'title description price currency location', { skip: page || 0, limit: limit || 10 })
+  async getItemsPaginated (page, limit, filter, coordinates) { // coordinates must be first longitude in arr
+    // const items = await ItemModel.find({}, 'title description price currency location', { skip: page || 0, limit: limit || 10 })
+    const items = await ItemModel.aggregate([
+      {
+        $geoNear: {
+          near: { type: 'Point', coordinates: [10.077955, 48.162323] },
+          distanceField: 'dist.calculated',
+          query: { $or: [{ description: { $regex: filter, $options: 'i' } }, { title: { $regex: filter, $options: 'i' } }] }
+        }
+      },
+      { $skip: page || 0 },
+      { $limit: limit || 10 }
+    ])
     return items
   }
 }
