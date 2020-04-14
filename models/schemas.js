@@ -134,6 +134,8 @@ const user = new mongoose.Schema({
 })
 
 item.index({ location: '2dsphere' })
+// TODO maybe index only on title
+item.index({ title: 'text' })
 
 const Item = mongoose.model('Item', item)
 const User = mongoose.model('User', user)
