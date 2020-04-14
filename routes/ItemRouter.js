@@ -10,12 +10,12 @@ const userService = require('../service/User')
 router.get('/item/:itemId', async (req, res, next) => res.send(await itemService.getItem(null, req.params.itemId)))
 
 router.post('/paginated', async (req, res, next) => {
-  const { page, limit, filter, coordinates } = req.body.searchOptions
-  const items = await itemService.getPaginated(page, limit, filter, coordinates)
+  const { page, limit, filter, coordinates, radius } = req.body.searchOptions
+  const items = await itemService.getPaginated(page, limit, filter, coordinates, radius)
   res.send(items)
 })
 
-router.post('/item/', authenticateToken, /* validate('itemcreate'), */ async (req, res, next) => {
+router.post('/item/', authenticateToken, validate('itemcreate'), async (req, res, next) => {
   // add new item
   try {
     const userId = req.user.user

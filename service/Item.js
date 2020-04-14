@@ -20,13 +20,7 @@ class ItemService {
     return item.save()
   }
 
-  async getPaginatedx (page, limit, filter, coordinates, radius) {
-    return filter
-      ? this.getPaginatedSearch(page, limit, filter, coordinates, radius)
-      : this.getItemsPaginated(page, limit, filter, coordinates, radius)
-  }
-
-  async getPaginated (page, limit, filter, coordinates, radius = 10000) {
+  async getPaginated (page, limit, filter, coordinates, radius = 100000) {
     // if filter was added show search results else show nearest items
     const search = filter && filter !== ''
       ? getSearchFilter(coordinates, radius, filter)
@@ -34,25 +28,6 @@ class ItemService {
 
     const items = await ItemModel.aggregate([
       search,
-      { $skip: page || 0 },
-      { $limit: limit || 10 },
-      { $project: { title: 1, description: 1, price: 1, owner: 1, categories: 1, createDate: 1, originalPrice: 1, viewedBy: 1 } }
-    ])
-    return items
-  }
-
-  async getItemsPaginated (page, limit, filter, coordinates, radius = 10000) { // coordinates must be [lon,lat]
-    const items = await ItemModel.aggregate([
-      {
-        $match: {
-          location: {
-            $geoWithin: {
-              $centerSphere: [coordinates, radius / 6371000] // convert to meters
-            }
-          },
-          $text: { $search: filter }
-        }
-      },
       { $skip: page || 0 },
       { $limit: limit || 10 },
       { $project: { title: 1, description: 1, price: 1, owner: 1, categories: 1, createDate: 1, originalPrice: 1, viewedBy: 1 } }
