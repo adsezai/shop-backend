@@ -1,19 +1,19 @@
 
-POST http://localhost:8080/login
+POST http://localhost:6060/login
 Content-Type: application/json
 
 {
-  "email":"adis2@gmail.de",
+  "email":"adis10@gmail.de",
   "password": "123456"
 }
 
 ###
-POST http://localhost:8080/register
+POST http://localhost:6060/register
 Content-Type: application/json
 
 {
   "firstname":"Adis",
-  "email": "adis5@gmail.de",
+  "email": "adis11@gmail.de",
   "password": "123456"
 }
 
@@ -22,8 +22,8 @@ DELETE http://localhost:8080/items/item/0b5dae28-e5ac-41b2-b77a-3d37f9114187
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NTE2OTA5OSwiZXhwIjoxNTg1MTY5Njk5fQ.O3quvZ3UwYB71rDVRRrbxYkgzdjoYuvXzQOt8Gafe64
 
 ###
-POST http://localhost:8080/items/item/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTg0MDBjNmUtNDAzOS00YzVjLTkyMGMtN2IzMWNhZjU4MTZkIiwiZW1haWwiOiJhZGlzMkBnbWFpbC5kZSIsImlhdCI6MTU4NjcyODUzMiwiZXhwIjoxNTg3NTkyNTMyfQ.ZoF2Z-qkfYUeuQkcLA3lbRD005TDTaOUbXYjbHieF14
+POST http://localhost:6060/items/item/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTViYjkyMjctNDRjOS00MWVlLTllMjUtY2UyYzY2Nzk3Yzc0IiwiZW1haWwiOiJhZGlzMTBAZ21haWwuZGUiLCJpYXQiOjE1OTY5MDgyMTQsImV4cCI6MTU5Nzc3MjIxNH0.XFMUAV754dcDDoUs79QAZwTdSUcyxf_kI3Y42kimLPQ
 Content-Type: application/json
 
 {
