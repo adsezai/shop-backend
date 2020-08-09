@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 6060
 db:
   uri: mongodb://localhost:27017/shop
   poolsize: 10

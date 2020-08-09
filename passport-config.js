@@ -1,4 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+
 const userService = require('./service/User')
 const bcrypt = require('bcrypt')
 
@@ -29,9 +31,31 @@ async function registerHandler (req, email, password, done) {
   }
 }
 
-function initialize (passport) {
-  passport.use('register', new LocalStrategy({ usernameField: 'email', passwordField: 'password', passReqToCallback: true }, registerHandler))
-  passport.use('login', new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, loginHander))
+async function googleHandler (token, tokenSecret, profile, done) {
+  try {
+    const user = await userService.findUser({ googleId: profile.id })
+    if (user) done(null, user)
+    else {
+      // create user // TODO get email correct
+      const userEmail = profile.emails ? profile.emails[0].value : ''
+      const newUser = await userService.createNewUser({ googleId: profile.id, firstname: profile.displayName, email: userEmail })
+      done(null, newUser)
+    }
+  } catch (error) {
+    done(error)
+  }
 }
 
-module.exports = initialize
+function initializePassport (passport) {
+  passport.use('register', new LocalStrategy({ usernameField: 'email', passwordField: 'password', passReqToCallback: true }, registerHandler))
+
+  passport.use('login', new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, loginHander))
+
+  passport.use('google', new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: '/auth/google/callback'
+  }, googleHandler))
+}
+
+module.exports = initializePassport

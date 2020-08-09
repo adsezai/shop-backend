@@ -1,6 +1,18 @@
 const uuid = require('uuid')
 const mongoose = require('mongoose')
 
+const pointSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Point'],
+    required: true
+  },
+  coordinates: {
+    type: [Number], // always insert longitude
+    required: true
+  }
+})
+
 const item = new mongoose.Schema({
   _id: {
     type: String,
@@ -22,16 +34,11 @@ const item = new mongoose.Schema({
   },
   locality: String,
   currency: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   location: {
-    latitude: {
-      type: Number
-    },
-    longitude: {
-      type: Number
-    }
+    type: pointSchema
   },
   createDate: {
     type: Date,
@@ -80,8 +87,10 @@ const user = new mongoose.Schema({
     required: true
   },
   password: {
-    type: String,
-    required: true
+    type: String
+  },
+  googleId: {
+    type: String
   },
   firstname: {
     type: String,
@@ -119,11 +128,24 @@ const user = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  itemsRef: [String]
+  itemsRef: [String],
+  favoriteItems: {
+    type: [String],
+    default: []
+  }
 })
+
+item.index({ location: '2dsphere' })
+// TODO maybe index only on title
+item.index({ title: 'text' })
 
 const Item = mongoose.model('Item', item)
 const User = mongoose.model('User', user)
+
+Item.on('index', function (error) {
+  console.log('done index')
+  error && console.log(error)
+})
 
 module.exports = {
   Item,
