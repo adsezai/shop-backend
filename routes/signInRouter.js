@@ -31,6 +31,18 @@ router.post('/secureroute', authenticateToken, (req, res, next) => {
   res.send('passed')
 })
 
+router.get('/auth/google', passport.authenticate('google', { session: false, scope: ['profile', 'email'] }))
+
+// TODO setup this url in google developer console
+router.get('/auth/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
+  const tokenBody = { user: req.user.id, email: req.user.email }
+  const accessToken = generateAccessToken(tokenBody)
+  const refreshToken = generateRefreshToken(tokenBody)
+
+  res.header('Authorization', `Bearer ${accessToken}`)
+  res.json({ refreshToken })
+})
+
 /* router.post('/token', (req, res) => {
   const refreshToken = req.body.token
   if (!refreshToken) return res.sendStatus(401)
