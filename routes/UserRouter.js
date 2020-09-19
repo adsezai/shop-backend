@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const { authenticateToken } = require('../service/Auth')
 
 const userService = require('../service/User')
 

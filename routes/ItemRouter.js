@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { authenticateToken } = require('../service/Auth')
-const { errorItemDoesNotExist } = require('../global/errors')
+// const { errorItemDoesNotExist } = require('../global/errors')
 const validate = require('../lib/validation/validation')
 
 const itemService = require('../service/Item')
