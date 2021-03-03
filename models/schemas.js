@@ -143,7 +143,6 @@ const Item = mongoose.model('Item', item)
 const User = mongoose.model('User', user)
 
 Item.on('index', function (error) {
-  console.log('done index')
   error && console.log(error)
 })
 

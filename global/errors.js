@@ -16,7 +16,7 @@ function throwHTTPError (code, msg) {
 }
 
 const handleError = (err, res) => {
-  console.log(err)
+  console.log('Error in Request: ', err.message)
   const { statusCode, message } = (err instanceof HTTPError)
     ? err
     : new HTTPError(500, 'Internal Server Error')

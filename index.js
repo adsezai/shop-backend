@@ -24,6 +24,6 @@ app.use((err, req, res, next) => handleErrorMiddleware(err, res))
 
 // const app = require('./graphql/graphql')
 
-const connection = require('./models/mongo')
+require('./models/mongo')
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
