@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
+
 const { authenticateToken } = require('../service/Auth')
 const userService = require('../service/User')
 
-router.get('/', authenticateToken, async (req, res, next) => {
+async function getFavorite (req, res, next) {
   try {
     const userId = req.user.user
     const items = await userService.getFavoriteItems(userId)
@@ -11,9 +12,9 @@ router.get('/', authenticateToken, async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-})
+}
 
-router.post('/', authenticateToken, async (req, res, next) => {
+async function addFavoriteItem (req, res, next) {
   try {
     const userId = req.user.user
     const itemId = req.body.id
@@ -22,9 +23,9 @@ router.post('/', authenticateToken, async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-})
+}
 
-router.delete('/', authenticateToken, async (req, res, next) => {
+async function deleteFavoriteItem (req, res, next) {
   try {
     const userId = req.user.user
     const itemId = req.body.id
@@ -33,6 +34,10 @@ router.delete('/', authenticateToken, async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-})
+}
+
+router.get('/', authenticateToken, getFavorite)
+router.post('/', authenticateToken, addFavoriteItem)
+router.delete('/', authenticateToken, deleteFavoriteItem)
 
 module.exports = router

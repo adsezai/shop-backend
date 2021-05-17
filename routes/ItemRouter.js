@@ -1,15 +1,14 @@
 const express = require('express')
 const router = express.Router()
+
 const { authenticateToken } = require('../service/Auth')
 // const { errorItemDoesNotExist } = require('../global/errors')
 const validate = require('../lib/validation/validation')
-
 const itemService = require('../service/Item')
 const userService = require('../service/User')
 
 async function getItem (req, res, next) {
   const item = await itemService.getItem(null, req.params.itemId)
-  console.log('Item')
   res.send(item)
 }
 
