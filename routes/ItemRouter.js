@@ -24,6 +24,18 @@ async function searchItems (req, res, next) {
   res.send(items)
 }
 
+async function getItemsPage (req, res, next) {
+  const { page, limit, filter, coordinates, radius } = req.body.searchOptions
+  const items = await itemService.getPage(
+    page,
+    limit,
+    filter,
+    coordinates,
+    radius
+  )
+  res.send(items)
+}
+
 async function addItem (req, res, next) {
   // add new item
   try {
@@ -67,6 +79,7 @@ async function deleteItem (req, res, next) {
 router.get('/item/:itemId', getItem)
 router.post('/item/', authenticateToken, validate('itemcreate'), addItem)
 router.post('/paginated', searchItems)
+router.post('/page', getItemsPage)
 router.put('/item/:itemId', authenticateToken, updateItem)
 router.delete('/item/:itemId', authenticateToken, deleteItem)
 

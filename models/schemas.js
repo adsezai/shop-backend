@@ -72,8 +72,8 @@ const item = new mongoose.Schema({
   },
   contQuestions: Number,
   countAnswers: Number,
-  keywors: [String]
-
+  keywors: [String],
+  imageUrls: [String]
 })
 
 const user = new mongoose.Schema({

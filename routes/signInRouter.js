@@ -22,7 +22,6 @@ router.post(
     const tokenBody = { user: req.user.id, email: req.user.email }
     const accessToken = generateAccessToken(tokenBody)
     const refreshToken = generateRefreshToken(tokenBody)
-
     // res.header("Authorization", `Bearer ${accessToken}`);
     res.json({ accessToken, refreshToken })
   }
@@ -32,7 +31,13 @@ router.post('/register', validate('register'), async (req, res, next) => {
   passport.authenticate('register', { session: false }, (error, user, info) => {
     if (error) return next(error) // res.sendStatus(500) // server error
     if (!user) return res.sendStatus(403) // user already exists
-    return res.json({ message: 'registered' }) // successfully created
+
+    const tokenBody = { user: user.id, email: user.email }
+    const accessToken = generateAccessToken(tokenBody)
+    const refreshToken = generateRefreshToken(tokenBody)
+
+    // res.header("Authorization", `Bearer ${accessToken}`);
+    return res.json({ accessToken, refreshToken })
   })(req, res, next)
 })
 
@@ -66,6 +71,7 @@ router.get(
     const accessToken = generateAccessToken(tokenBody)
     const refreshToken = generateRefreshToken(tokenBody)
 
+    // Setting cookies here will not work in development if the redirect url is on another host:port url
     res.header('Authorization', `Bearer ${accessToken}`)
     res.json({ refreshToken })
   }

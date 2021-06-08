@@ -22,16 +22,46 @@ class ItemService {
     return item.save()
   }
 
-  async getPaginated (page, limit, filter, coordinates, radius = 100000) {
+  async getPaginated (pageSize, limit, filter, coordinates, radius = 100000) {
     // if filter was added show search results else show nearest items
-    const search = filter && filter !== ''
+
+    /*     const search = filter && filter !== ''
       ? getSearchFilter(coordinates, radius, filter)
-      : getSearchNoFilter(coordinates)
+      : getSearchNoFilter(coordinates) */
 
     const items = await ItemModel.aggregate([
       /*  search, */
-      { $skip: page || 0 },
-      { $limit: limit || 10 },
+      { $skip: parseInt(pageSize) || 0 },
+      { $limit: parseInt(limit) || 10 },
+      {
+        $project: {
+          title: 1,
+          description: 1,
+          price: 1,
+          owner: 1,
+          categories: 1,
+          createDate: 1,
+          originalPrice: 1,
+          viewedBy: 1
+        }
+      }
+    ])
+    return items
+  }
+
+  async getPage (page, limit, filter, coordinates, radius = 100000) {
+  // if filter was added show search results else show nearest items
+
+    /*     const search = filter && filter !== ''
+      ? getSearchFilter(coordinates, radius, filter)
+      : getSearchNoFilter(coordinates) */
+
+    page = parseInt(page)
+    if (page > 0) page = page - 1
+    const items = await ItemModel.aggregate([
+    /*  search, */
+      { $skip: page * limit },
+      { $limit: parseInt(limit) || 10 },
       {
         $project: {
           title: 1,
