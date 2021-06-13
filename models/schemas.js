@@ -37,8 +37,8 @@ const item = new mongoose.Schema({
     type: String
     // required: true
   },
-  location: {
-    type: pointSchema
+  location: { // FIXME String is temporary
+    type: pointSchema | String
   },
   createDate: {
     type: Date,
