@@ -1,17 +1,18 @@
 const express = require('express')
 const router = express.Router()
-
 var Busboy = require('busboy')
-const fs = require('fs')
+const uuid = require('uuid')
 const { pipeline: pLine } = require('stream')
 const util = require('util')
-const pipeline = util.promisify(pLine)
-
 const { authenticateToken } = require('../service/Auth')
 // const { errorItemDoesNotExist } = require('../global/errors')
 const validate = require('../lib/validation/validation')
 const itemService = require('../service/Item')
 const userService = require('../service/User')
+const { uploadImageToStorage } = require('../service/ImageStorage')
+const { errorNoImageWasAddedToImageStorage } = require('../global/errors')
+
+const pipeline = util.promisify(pLine)
 
 async function getItem (req, res, next) {
   const item = await itemService.getItem(null, req.params.itemId)
@@ -55,43 +56,62 @@ async function addItem (req, res, next) {
   }
 }
 
+async function uploadImage (imageId, file, mimetype) {
+  try {
+    const result = await uploadImageToStorage(imageId, file, mimetype)
+    console.log('Uploaded Image to Storage Provider.')
+    return result
+  } catch (error) {
+    console.log('Error uploading Images to Storage Provider.', error.message)
+  }
+}
+
+function reorderImageUrls (firstImage, imageUrls) {
+  const index = imageUrls.findIndex(imageId => imageId === firstImage)
+
+  return index > -1
+    ? [firstImage, ...imageUrls.filter(id => id !== firstImage)]
+    : imageUrls
+}
+
 async function addItemImage (req, res, next) {
   var busboy = new Busboy({ headers: req.headers })
-  let itemid = null
-  let processImage = null
+  const { itemid } = req.query
 
-  busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
-    console.log('Start processing file ' + filename)
+  const addedImageIds = []
+  let fileCount = 0
+  let finishedAllFiles, thumbnailFile
 
-    processImage = new Promise((resolve, reject) => {
-      // TODO Add Storage Provider logic here
-      pipeline(file, fs.createWriteStream('./testfiles/' + filename)).then(() => {
-        console.log('Uploaded Image to Storage Provider')
-        console.log('Add imageId to Item', itemid)
-        resolve('Sucessfully added new image to item')
-      }).catch(error => reject(error))
-    })
+  busboy.on('file', async (fieldname, file, filename, encoding, mimetype) => {
+    const imageId = uuid.v4()
+    console.log('Start processing file ', imageId)
+    if (fileCount === 0 && !thumbnailFile) thumbnailFile = imageId
+    fileCount++
+    const result = await uploadImage(imageId, file, mimetype)
+    result && addedImageIds.push(imageId)
+    if (--fileCount === 0 && finishedAllFiles === true) {
+      try {
+        console.log('Sucessfully added images.', addedImageIds)
+        // TODO rollback item from DB
+        addedImageIds || errorNoImageWasAddedToImageStorage()
+        const orderedImageUrls = reorderImageUrls(thumbnailFile, addedImageIds)
+        const item = await userService.updateItem(req.user.user, itemid, { imageUrls: orderedImageUrls })
+        res.status(200).json(item)
+      } catch (error) {
+        console.log('Error adding images', error)
+        res.status(error.code).send(error.message)
+      }
+    }
   })
 
-  busboy.on('field', (fieldname, value) => {
-    if (fieldname === 'itemid') itemid = value
+  busboy.on('finish', async () => {
+    finishedAllFiles = true
   })
 
-  busboy.on('finish', () => {
-    console.log('Done parsing form!')
-
-    processImage
-      .then(result => {
-        console.log('Finished processing file')
-        res.send(result)
-        res.end()
-      })
-      .catch(error => {
-        console.log('Error processing file ', error)
-      })
+  await pipeline(req, busboy).catch(error => {
+    console.log('Error adding images', error)
+    res.status(error.code).send(error.message)
   })
-
-  req.pipe(busboy)
 }
 
 async function updateItem (req, res, next) {

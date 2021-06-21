@@ -42,7 +42,8 @@ class ItemService {
           categories: 1,
           createDate: 1,
           originalPrice: 1,
-          viewedBy: 1
+          viewedBy: 1,
+          imageUrls: 1
         }
       }
     ])
@@ -71,7 +72,8 @@ class ItemService {
           categories: 1,
           createDate: 1,
           originalPrice: 1,
-          viewedBy: 1
+          viewedBy: 1,
+          imageUrls: 1
         }
       }
     ])

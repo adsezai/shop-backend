@@ -6,10 +6,13 @@ const userRouter = require('./routes/UserRouter')
 const loginRouter = require('./routes/signInRouter')
 const favoriteRouter = require('./routes/favoriteRouter')
 
-const passport = require('passport')
-
 const config = require('config')
+
+const passport = require('passport')
 const PORT = config.get('server.port')
+
+require('./models/mongo')
+require('./service/ImageStorage').initializeImageStorage(config.get('azure.connectionString'), config.get('azure.containerName'))
 
 app.use(express.json())
 app.use(passport.initialize())
@@ -23,7 +26,5 @@ app.use('/', loginRouter)
 app.use((err, req, res, next) => handleErrorMiddleware(err, res))
 
 // const app = require('./graphql/graphql')
-
-require('./models/mongo')
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

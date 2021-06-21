@@ -3,3 +3,6 @@ server:
 db:
   uri: mongodb://localhost:27017/shop
   poolsize: 10
+azure:
+  connectionString: ""
+  containerName: ""
