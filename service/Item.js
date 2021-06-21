@@ -61,6 +61,7 @@ class ItemService {
     if (page > 0) page = page - 1
     const items = await ItemModel.aggregate([
     /*  search, */
+      { $sort: { createDate: -1 } },
       { $skip: page * limit },
       { $limit: parseInt(limit) || 10 },
       {
