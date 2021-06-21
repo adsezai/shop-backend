@@ -41,9 +41,7 @@ class UserService {
     const user = await UserModel.findById(userId)
     user[userProp.ITEMSREF].includes(itemId) || errorUserHasNotItem(user)
 
-    // return item before update
     const item = await ItemModel.findByIdAndUpdate(itemId, updateFields, { useFindAndModify: false, new: true }) || errorItemDoesNotExist(itemId)
-    console.log(item)
     return item
   }
 

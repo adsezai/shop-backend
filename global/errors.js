@@ -29,5 +29,6 @@ module.exports = {
   errorUserHasNotItem: () => throwHTTPError(404, 'User has no Item with this ID.'),
   errorItemDoesNotExist: (itemId) => throwHTTPError(404, `Item ${itemId} does not exist`),
   errorBadRequest: (message) => throwHTTPError(400, message),
+  errorNoImageWasAddedToImageStorage: () => throwHTTPError(500, 'No image was added to ImageStore.'),
   handleErrorMiddleware: handleError
 }
