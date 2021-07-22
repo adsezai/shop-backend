@@ -28,6 +28,7 @@ module.exports = {
   errorMaxItemsReached: () => throwHTTPError(403, 'Max count items reached'),
   errorUserHasNotItem: () => throwHTTPError(404, 'User has no Item with this ID.'),
   errorItemDoesNotExist: (itemId) => throwHTTPError(404, `Item ${itemId} does not exist`),
+  errorUserDoesNotExist: (user) => throwHTTPError(404, `No User exists for: ${user}`),
   errorBadRequest: (message) => throwHTTPError(400, message),
   errorNoImageWasAddedToImageStorage: () => throwHTTPError(500, 'No image was added to ImageStore.'),
   handleErrorMiddleware: handleError

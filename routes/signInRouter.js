@@ -1,36 +1,31 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('passport')
+
+const { sendJsonNext } = require('../lib/api/util')
 const {
   authenticateToken,
   generateAccessToken,
   generateRefreshToken
 } = require('../service/Auth')
 const validate = require('../lib/validation/validation')
-
 const { getUser } = require('../service/User')
-
-const passport = require('passport')
 const initializePassport = require('../passport-config')
 
 initializePassport(passport)
 
-router.post(
-  '/login',
-  passport.authenticate('login', { session: false }),
-  (req, res) => {
-    // if auth was successfull user is userObj
-    const tokenBody = { user: req.user.id, email: req.user.email }
-    const accessToken = generateAccessToken(tokenBody)
-    const refreshToken = generateRefreshToken(tokenBody)
-    // res.header("Authorization", `Bearer ${accessToken}`);
-    res.json({ accessToken, refreshToken })
-  }
-)
+function login (req) {
+  const tokenBody = { user: req.user.id, email: req.user.email }
+  const accessToken = generateAccessToken(tokenBody)
+  const refreshToken = generateRefreshToken(tokenBody)
+  // res.header("Authorization", `Bearer ${accessToken}`);
+  return { accessToken, refreshToken }
+}
 
-router.post('/register', validate('register'), async (req, res, next) => {
+async function register (req, res, next) {
   passport.authenticate('register', { session: false }, (error, user, info) => {
-    if (error) return next(error) // res.sendStatus(500) // server error
-    if (!user) return res.sendStatus(403) // user already exists
+    if (error) return next(error)
+    if (!user) return res.sendStatus(409)
 
     const tokenBody = { user: user.id, email: user.email }
     const accessToken = generateAccessToken(tokenBody)
@@ -39,21 +34,34 @@ router.post('/register', validate('register'), async (req, res, next) => {
     // res.header("Authorization", `Bearer ${accessToken}`);
     return res.json({ accessToken, refreshToken })
   })(req, res, next)
-})
+}
 
-router.get('/auth/user', authenticateToken, async (req, res, next) => {
+async function user (req) {
   const { user: id } = req.user
+
   const user = await getUser(id)
-  // TODO return whole user without pw, and filter in frontend
+
   const { email, firstname, lastname } = user
-  return res.json({ email, firstname, lastname })
-})
 
-router.post('/secureroute', authenticateToken, (req, res, next) => {
-  // if reached here, user is authorized
-  res.send('passed')
-})
+  return { email, firstname, lastname }
+}
 
+function googleCallback (req, res) {
+  const tokenBody = { user: req.user.id, email: req.user.email }
+  const accessToken = generateAccessToken(tokenBody)
+  const refreshToken = generateRefreshToken(tokenBody)
+
+  // Setting cookies here will not work in development if the redirect url is on another host:port url
+  // TODO redirect to Nextjs and set auth header, then from nextjs redirect to nextjs home
+  res.header('Authorization', `Bearer ${accessToken}`)
+  res.json({ refreshToken })
+}
+
+const wrap = fn => (req, res, next) => sendJsonNext(res, next, fn(req))
+
+router.get('/auth/user', authenticateToken, wrap(req => user(req)))
+router.post('/login', passport.authenticate('login', { session: false }), wrap(req => login(req)))
+router.post('/register', validate('register'), register)
 router.get(
   '/auth/google',
   passport.authenticate('google', {
@@ -61,21 +69,11 @@ router.get(
     scope: ['profile', 'email']
   })
 )
-
-// TODO setup this url in google developer console
 router.get(
   '/auth/google/callback',
-  passport.authenticate('google', { session: false }),
-  (req, res) => {
-    const tokenBody = { user: req.user.id, email: req.user.email }
-    const accessToken = generateAccessToken(tokenBody)
-    const refreshToken = generateRefreshToken(tokenBody)
+  passport.authenticate('google', { session: false }), googleCallback)
 
-    // Setting cookies here will not work in development if the redirect url is on another host:port url
-    res.header('Authorization', `Bearer ${accessToken}`)
-    res.json({ refreshToken })
-  }
-)
+module.exports = router
 
 /* router.post('/token', (req, res) => {
   const refreshToken = req.body.token
@@ -92,5 +90,3 @@ router.delete('/delete', (req, res) => {
   refreshTokens = refreshTokens.filter(token => token !== req.body.token)
   res.sendStatus(204)
 }) */
-
-module.exports = router

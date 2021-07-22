@@ -1,6 +1,6 @@
 const { User: UserModel, Item: ItemModel } = require('../models/schemas')
 const { userConstraints: userConst, userProperties: userProp } = require('../global/const')
-const { errorMaxItemsReached, errorUserHasNotItem, errorItemDoesNotExist } = require('../global/errors')
+const { errorMaxItemsReached, errorUserHasNotItem, errorItemDoesNotExist, errorUserDoesNotExist } = require('../global/errors')
 
 class UserService {
   async createNewUser (user) {
@@ -52,17 +52,17 @@ class UserService {
 
   async getUserByEmail (email) {
     const user = await UserModel.findOne({ email: email })
-    return user
+    return user || errorUserDoesNotExist(email)
   }
 
   async findUser (options) {
     const user = await UserModel.findOne(options)
-    return user
+    return user || errorUserDoesNotExist(options)
   }
 
   async getUser (userId) {
     const user = await UserModel.findById(userId)
-    return user
+    return user || errorUserDoesNotExist(userId)
   }
 
   // TODO what if some items have been deleted?

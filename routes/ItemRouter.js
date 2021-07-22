@@ -4,6 +4,7 @@ var Busboy = require('busboy')
 const uuid = require('uuid')
 const { pipeline: pLine } = require('stream')
 const util = require('util')
+
 const { authenticateToken } = require('../service/Auth')
 // const { errorItemDoesNotExist } = require('../global/errors')
 const validate = require('../lib/validation/validation')
@@ -11,16 +12,19 @@ const itemService = require('../service/Item')
 const userService = require('../service/User')
 const { uploadImageToStorage } = require('../service/ImageStorage')
 const { errorNoImageWasAddedToImageStorage } = require('../global/errors')
+const { sendJsonNext } = require('../lib/api/util')
 
 const pipeline = util.promisify(pLine)
 
-async function getItem (req, res, next) {
+async function getItem (req) {
   const item = await itemService.getItem(null, req.params.itemId)
-  res.send(item)
+
+  return item
 }
 
-async function searchItems (req, res, next) {
+async function searchItems (req) {
   const { page, limit, filter, coordinates, radius } = req.body.searchOptions
+
   const items = await itemService.getPaginated(
     page,
     limit,
@@ -28,11 +32,12 @@ async function searchItems (req, res, next) {
     coordinates,
     radius
   )
-  res.send(items)
+  return items
 }
 
-async function getItemsPage (req, res, next) {
+async function getItemsPage (req) {
   const { page, limit, filter, coordinates, radius } = req.body.searchOptions
+
   const items = await itemService.getPage(
     page,
     limit,
@@ -40,20 +45,16 @@ async function getItemsPage (req, res, next) {
     coordinates,
     radius
   )
-  res.send(items)
+  return items
 }
 
 async function addItem (req, res, next) {
-  try {
-    const userId = req.user.user
-    const item = req.body
+  const userId = req.user.user
+  const item = req.body
 
-    const newItem = await userService.addNewItem(userId, item)
-    return res.json(newItem)
-  } catch (error) {
-    console.error(error)
-    next(error)
-  }
+  const newItem = await userService.addNewItem(userId, item)
+
+  return newItem
 }
 
 async function uploadImage (imageId, file, mimetype) {
@@ -87,6 +88,7 @@ async function addItemImage (req, res, next) {
     console.log('Start processing file ', imageId)
     if (fileCount === 0 && !thumbnailFile) thumbnailFile = imageId
     fileCount++
+    // TODO if single image an this throws error
     const result = await uploadImage(imageId, file, mimetype)
     result && addedImageIds.push(imageId)
     if (--fileCount === 0 && finishedAllFiles === true) {
@@ -114,39 +116,35 @@ async function addItemImage (req, res, next) {
   })
 }
 
-async function updateItem (req, res, next) {
-  try {
-    const itemId = req.params.itemId
-    const updateFields = req.body
-    const item = await userService.updateItem(
-      req.user.user,
-      itemId,
-      updateFields
-    )
-    res.json({ item })
-  } catch (error) {
-    console.error(error)
-    next(error)
-  }
+async function updateItem (req) {
+  const itemId = req.params.itemId
+  const updateFields = req.body
+
+  const item = await userService.updateItem(
+    req.user.user,
+    itemId,
+    updateFields
+  )
+
+  return { item }
 }
 
-async function deleteItem (req, res, next) {
-  try {
-    const itemId = req.params.itemId
-    await userService.deleteItem(req.user.user, itemId)
-    return res.json({ id: itemId })
-  } catch (error) {
-    console.error(error)
-    next(error)
-  }
+async function deleteItem (req) {
+  const itemId = req.params.itemId
+
+  await userService.deleteItem(req.user.user, itemId)
+
+  return { id: itemId }
 }
 
-router.get('/item/:itemId', getItem)
-router.post('/item/', authenticateToken, validate('itemcreate'), addItem)
+const wrap = fn => (req, res, next) => sendJsonNext(res, next, fn(req))
+
+router.post('/item/', authenticateToken, validate('itemcreate'), wrap(req => addItem(req)))
+router.get('/item/:itemId', wrap(req => getItem(req)))
+router.put('/item/:itemId', authenticateToken, wrap(req => updateItem(req)))
+router.delete('/item/:itemId', authenticateToken, wrap(req => deleteItem(req)))
+router.post('/paginated', wrap(req => searchItems(req)))
+router.post('/page', wrap(req => getItemsPage(req)))
 router.post('/image', authenticateToken, /* validate('itemimage'), */ addItemImage)
-router.post('/paginated', searchItems)
-router.post('/page', getItemsPage)
-router.put('/item/:itemId', authenticateToken, updateItem)
-router.delete('/item/:itemId', authenticateToken, deleteItem)
 
 module.exports = router
