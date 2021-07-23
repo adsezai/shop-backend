@@ -1,5 +1,5 @@
 server:
-  port: SERVER_PORT
+  port: PORT
 db:
   uri: DB_CONNECTION
   poolsize: DB_POOLSIZE

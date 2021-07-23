@@ -1,13 +1,12 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-const ACCESS_TOKEN_EXIPIRE_TIME = '10d' // TODO change this
+const ACCESS_TOKEN_EXIPIRE_TIME = '10d'
 const REFRESH_TOKEN_EXIPIRE_TIME = '7d'
 
 function authenticateToken (req, res, next) {
-  const authHeader = req.headers.authorization
+  const authHeader = req.headers.authorization || req.headers['fwd-auth']
 
-  // Token is in header in the form [Bearer, TOKEN]
   const token = authHeader && authHeader.split(' ')[1]
   if (!token) return res.sendStatus(401)
 
