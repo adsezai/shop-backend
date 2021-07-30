@@ -14,7 +14,7 @@ const initializePassport = require('../passport-config')
 
 initializePassport(passport)
 
-function login (req) {
+async function login (req) {
   const tokenBody = { user: req.user.id, email: req.user.email }
   const accessToken = generateAccessToken(tokenBody)
   const refreshToken = generateRefreshToken(tokenBody)
@@ -49,12 +49,9 @@ async function user (req) {
 function googleCallback (req, res) {
   const tokenBody = { user: req.user.id, email: req.user.email }
   const accessToken = generateAccessToken(tokenBody)
-  const refreshToken = generateRefreshToken(tokenBody)
+  // const refreshToken = generateRefreshToken(tokenBody)
 
-  // Setting cookies here will not work in development if the redirect url is on another host:port url
-  // TODO redirect to Nextjs and set auth header, then from nextjs redirect to nextjs home
-  res.header('Authorization', `Bearer ${accessToken}`)
-  res.json({ refreshToken })
+  res.json({ accessToken })
 }
 
 const wrap = fn => (req, res, next) => sendJsonNext(res, next, fn(req))
@@ -67,6 +64,7 @@ router.get(
   passport.authenticate('google', {
     session: false,
     scope: ['profile', 'email']
+
   })
 )
 router.get(
@@ -74,19 +72,3 @@ router.get(
   passport.authenticate('google', { session: false }), googleCallback)
 
 module.exports = router
-
-/* router.post('/token', (req, res) => {
-  const refreshToken = req.body.token
-  if (!refreshToken) return res.sendStatus(401)
-  if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403)
-    const accessToken = generateAccessToken({ name: user.name })
-    res.json({ accessToken })
-  })
-})
-
-router.delete('/delete', (req, res) => {
-  refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-  res.sendStatus(204)
-}) */

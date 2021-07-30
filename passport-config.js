@@ -1,14 +1,13 @@
 const LocalStrategy = require('passport-local').Strategy
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-
-const userService = require('./service/User')
 const bcrypt = require('bcrypt')
 
-async function loginHander (email, password, done) {
-  const user = await userService.getUserByEmail(email)
-  if (user == null) return done(null, false, { message: 'No user found' })
+const userService = require('./service/User')
 
+async function loginHander (email, password, done) {
   try {
+    const user = await userService.getUserByEmail(email)
+    if (user == null) return done(null, false, { message: 'No user found' })
     if (await bcrypt.compare(password, user.password)) {
       return done(null, user)
     } else {
@@ -18,6 +17,7 @@ async function loginHander (email, password, done) {
     done(error)
   }
 }
+
 async function registerHandler (req, email, password, done) {
   const existingUser = await userService.getUserByEmail(email)
   if (existingUser != null) return done(null, false, { message: 'User with email already exists' })
@@ -54,7 +54,7 @@ function initializePassport (passport) {
   passport.use('google', new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
+    callbackURL: `${process.env.APPLICATION_ROOT}/api/auth/google/callback`
   }, googleHandler))
 }
 
