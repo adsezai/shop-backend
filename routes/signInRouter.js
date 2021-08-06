@@ -41,9 +41,9 @@ async function user (req) {
 
   const user = await getUser(id)
 
-  const { email, firstname, lastname } = user
+  const { email, firstname, lastname, phone, isPremium, userType, picture } = user
 
-  return { email, firstname, lastname }
+  return { email, firstname, lastname, phone, isPremium, userType, picture }
 }
 
 function googleCallback (req, res) {

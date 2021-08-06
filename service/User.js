@@ -57,7 +57,7 @@ class UserService {
 
   async findUser (options) {
     const user = await UserModel.findOne(options)
-    return user || errorUserDoesNotExist(options)
+    return user
   }
 
   async getUser (userId) {

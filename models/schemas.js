@@ -86,6 +86,9 @@ const user = new mongoose.Schema({
     unique: true,
     required: true
   },
+  phone: {
+    type: String
+  },
   password: {
     type: String
   },
@@ -100,6 +103,9 @@ const user = new mongoose.Schema({
   avatar: {
     id: String,
     size: String
+  },
+  picture: {
+    url: String
   },
   language: String,
   locale: String,

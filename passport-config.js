@@ -36,9 +36,9 @@ async function googleHandler (token, tokenSecret, profile, done) {
     const user = await userService.findUser({ googleId: profile.id })
     if (user) done(null, user)
     else {
-      // create user // TODO get email correct
-      const userEmail = profile.emails ? profile.emails[0].value : ''
-      const newUser = await userService.createNewUser({ googleId: profile.id, firstname: profile.displayName, email: userEmail })
+      const userEmail = profile?.emails?.[0] || ''
+      const pictureUrl = profile?.photos?.[0]?.value
+      const newUser = await userService.createNewUser({ googleId: profile.id, firstname: profile.displayName, email: userEmail, picture: { url: pictureUrl } })
       done(null, newUser)
     }
   } catch (error) {
